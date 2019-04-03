@@ -10,14 +10,14 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        print(head.val)
-        if head.val == None:
-            return head
-        if head.next == None:
-            return None
-        head.val = None
-        return self.detectCycle(head.next)
- 
+        while(True):
+            if head.val == None:
+                return head
+            if head.next == None:
+                return None
+            head.val = None
+            head = head.next
+  
 head = ListNode(3)
 snd = ListNode(2)
 thrid = ListNode(0)
