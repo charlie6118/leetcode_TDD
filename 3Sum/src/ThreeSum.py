@@ -1,39 +1,33 @@
 class Solution(object):
     def threeSum(self, nums):
-        aux = nums.copy()
-        pairList = []
-        for index, num in enumerate(nums):
-            for j in range(index + 1, len(nums)):
-                pairList.append((aux[j], num))
-
-        result = []
-        for (x, y) in pairList:
-            nums.remove(x)
-            nums.remove(y)
-            for num in nums:
-                if (x + y) == - num:
-                    if x <= y <= num and [x, y, num] not in result:
-                        result.append([x, y, num])
-                    if x <= num <= y and [x, num, y] not in result:
-                        result.append([x, num, y])
-                    if num <= x <= y and [num, x, y] not in result:
-                        result.append([num, x, y])
-                    if num <= y <= x and [num, y, x] not in result:
-                        result.append([num, y, x])
-                    if y <= x <= num and [y, x, num] not in result:
-                        result.append([y, x, num])
-                    if y <= num <= x and [y, num, x] not in result:
-                        result.append([y, num, x])
-            nums.append(x)
-            nums.append(y)
-        return result
-
-        # resultFinal = []
-        # for r in result:
-        #     r.sort()
-        #     if r not in resultFinal:
-        #         resultFinal.append(r)
-        # return resultFinal
-
+        result = set()
+        plus = sorted([num for num in nums if num > 0])
+        plus_s = set(plus)
+        minus = sorted([num for num in nums if num < 0])
+        minus_s = set(minus)
+        zero = [num for num in nums if num == 0]
+        # 0, 0, 0
+        if len(zero) > 2:
+            result.add((0, 0, 0))
+        # -, 0, +
+        if len(zero) > 0:
+            for e in plus_s:
+                if -e in minus_s:
+                    result.add((-e, 0, e))
+        # -, -, +
+        lenM = len(minus)
+        for i in range(lenM):
+            for j in range(i + 1, lenM):
+                sumTwoMinus = minus[i] + minus[j]
+                if -sumTwoMinus in plus_s:
+                    result.add((minus[i], minus[j], -sumTwoMinus))
+        # -, +, +
+        lenP = len(plus)
+        for i in range(lenP):
+            for j in range(i + 1, lenP):
+                sumTwoPlus = plus[i] + plus[j]
+                if -sumTwoPlus in minus_s:
+                    result.add((-sumTwoPlus, plus[i], plus[j]))
+        return list(result)
 S = Solution()
 print(S.threeSum([-1, 0, 1, 2, -1, -4]))
