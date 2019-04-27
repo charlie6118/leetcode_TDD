@@ -9,3 +9,11 @@ print(d)
 # traverse through key and value
 for i, v in enumerate(nums):
     print(i, v)
+
+# iterate through dictionary
+dic = {}
+for num in nums:
+    dic[num] = dic.get(num, 0)+1
+for key, val in dic.items():
+    if val == 1:
+        print(key)
