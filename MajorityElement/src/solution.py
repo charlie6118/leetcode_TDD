@@ -8,8 +8,5 @@ class Solution(object):
         d = {}
         for num in nums:
             d[num] = d.get(num, 0) + 1
-        
-        for key, val in d.items():
-            if val > n:
-                return key
-        
+            if d[num] > n:
+                return num
