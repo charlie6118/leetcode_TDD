@@ -17,3 +17,6 @@ for num in nums:
 for key, val in dic.items():
     if val == 1:
         print(key)
+
+#size of dictionary
+len(dic)
