@@ -20,3 +20,10 @@ for key, val in dic.items():
 
 #size of dictionary
 len(dic)
+
+# find the mid of linked list
+# slw & fst, slw move once each time and fst move twice 
+fast = slow = head
+while fast and fast.next:
+    fast = fast.next.next
+    slow = slow.next
