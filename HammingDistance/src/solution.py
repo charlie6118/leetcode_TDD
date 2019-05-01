@@ -16,3 +16,12 @@ class Solution(object):
             if x[idx] != y[idx]:
                 cnt += 1
         return cnt
+
+        # leedcode fast solution
+        # cnt = 0
+        # while x > 0 or y > 0:
+        #     if x % 2 != y % 2:
+        #         cnt += 1
+        #     x = x // 2
+        #     y = y // 2
+        # return cnt
