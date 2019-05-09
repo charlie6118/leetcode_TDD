@@ -5,37 +5,23 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        if numRows < 2: return s
-        table = []
-        for _ in range(numRows):
-            table.append([])
-        cnt_up = True
-        row_cnt_up = 0
-        cnt_down = False
-        row_cnt_down = numRows - 2
+        if numRows < 2: 
+            return s
+
+        r = [""] * numRows
+        step = 1
+        pos = 0
         for c in s:
-            print(c)
-            if cnt_up:
-                table[row_cnt_up].append(c)
-                row_cnt_up += 1
-                if row_cnt_up > numRows - 1:
-                    row_cnt_up = 0
-                    cnt_up = False
-                    cnt_down = True
-                    # if only two rows, keep use cnt_up
-                    if numRows == 2:
-                        cnt_up = True
-                        cnt_down = False
-            elif cnt_down:
-                table[row_cnt_down].append(c)
-                row_cnt_down -= 1
-                if row_cnt_down <= 0:
-                    row_cnt_down = numRows - 2
-                    cnt_down = False
-                    cnt_up = True
-            print(table)
+            r[pos] += c
+            if pos == 0: 
+                step = 1
+            elif pos == numRows - 1:
+                step = -1
+            pos += step
+        
+        # return "".join(r)
         result = ""
-        for row in table:
+        for row in r:
             for col in row:
                 result += col
         return result
